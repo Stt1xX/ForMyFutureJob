@@ -1,0 +1,57 @@
+ORG 0x30B
+A: Word 0xEBD9
+ORG 0x308
+X: NOP
+Y: NOP
+Z: NOP
+ORG 0x2F1
+START: CLA
+ST A
+LD X
+PUSH
+CALL 0x67B
+POP
+DEC
+ADD A
+ST A
+LD Y
+PUSH
+CALL 0x67B
+POP
+ADD A
+ST A
+LD Z
+PUSH
+CALL 0x67B
+POP
+DEC
+ADD A
+ST A
+HLT; the end of main program
+ORG 0x067E; set up of function
+B: Word 0x6E0B
+ORG 0x0687
+F: Word 0xAE02
+I: Word 0xEC01
+H: Word 0x0A00
+D: Word 0xF949
+G: Word 0x003F
+ORG 0x0681
+E: Word 4E08
+C: Word 4C01 
+ORG 0x067B
+LD &1
+BZS  B
+BNC C
+SUB D; - this is B
+BNS E
+JUMP F
+ADD D
+ADD &1
+ADD &1
+ADD &1
+ADD G
+JUMP I
+LD D
+
+
