@@ -1,9 +1,9 @@
 ORG 0x30B
 A: Word 0xEBD9
 ORG 0x308
-X: NOP
-Y: NOP
-Z: NOP
+X: Word 0xF623
+Y: Word 0xFFE6
+Z: Word 0x015B
 ORG 0x2F1
 START: CLA
 ST A
