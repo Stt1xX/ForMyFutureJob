@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cat>
+    <name>вспыш</name>
+    <age>8</age>
+    <weight>12</weight>
+</cat>
