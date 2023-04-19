@@ -14,7 +14,7 @@ import java.util.*;
 
 public class CollectionManager {
 
-    protected ArrayDeque<Movie> arrayDeque; // change private ---> protected
+    protected ArrayDeque<Movie> arrayDeque;
     private LocalDate initializationDate;
 
     private long current_id = 1;

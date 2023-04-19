@@ -86,11 +86,11 @@ public class FileManager extends CollectionManager {
             collectionManager.arrayDeque = fileManager.movies;
             return collectionManager;
         } catch (IOException e) {
-            System.out.println("File is not found");
+            System.out.println("Убедитесь, что в переменной окружения правильный путь.");
         } catch (JAXBException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Предупреждение: коллекция пуста");
         }
-        return null;
+        return new CollectionManager();
     }
 
     public Scanner getScanner(String scriptAdress) {
@@ -98,7 +98,7 @@ public class FileManager extends CollectionManager {
         try {
             return new Scanner(path);
         } catch (IOException e) {
-            System.out.println("File is not found");
+            System.out.println("Убедитесь, что в переменной окружения правильный путь.");
         }
         return null;
     }
