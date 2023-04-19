@@ -1,6 +1,4 @@
 package fergie.me;
-
-import java.io.File;
 import java.util.Scanner;
 
 
@@ -9,14 +7,14 @@ import java.util.Scanner;
  * @author FergieDoigrales/St1xXx
  * @version 0.1
  */
+
 public class Main {
     public static void main(String[] args) {
-        String arg[];
+        String[] arg;
         Scanner scanner = new Scanner(System.in);
         CollectionManager collectionManager = new FileManager().importFromFile();
         CommandManager commandManager = new CommandManager(collectionManager, scanner);
         while (true) {
-
             String s = (scanner.nextLine());
             arg = s.split("\s+");
             if (arg.length == 1) {
