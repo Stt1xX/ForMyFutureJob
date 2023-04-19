@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<fileManager>
+    <movies>
+        <coordinates>
+            <y>765.0</y>
+            <x>32.0</x>
+        </coordinates>
+        <genre>ACTION</genre>
+        <id>2</id>
+        <mpaaRating>PG</mpaaRating>
+        <name>Terminator</name>
+        <operator>
+            <eyeColor>RED</eyeColor>
+            <height>178</height>
+            <location>
+                <name>MoscowCity</name>
+                <x>0.0</x>
+                <y>211.0</y>
+                <z>0</z>
+            </location>
+            <name>Dr. Dre</name>
+            <nationality>VATICAN</nationality>
+        </operator>
+        <oscarsCount>2</oscarsCount>
+    </movies>
+    <movies>
+        <coordinates>
+            <y>2.0</y>
+            <x>4.0</x>
+        </coordinates>
+        <genre>ACTION</genre>
+        <id>1</id>
+        <mpaaRating>G</mpaaRating>
+        <name>test</name>
+        <operator>
+            <eyeColor>RED</eyeColor>
+            <height>12</height>
+            <location>
+                <name>loc</name>
+                <x>0.0</x>
+                <y>321.0</y>
+                <z>0</z>
+            </location>
+            <name>MASha</name>
+            <nationality>FRANCE</nationality>
+        </operator>
+        <oscarsCount>3</oscarsCount>
+    </movies>
+</fileManager>
