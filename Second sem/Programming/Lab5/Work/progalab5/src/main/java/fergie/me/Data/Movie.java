@@ -35,17 +35,17 @@ public class Movie implements Comparable<Movie> {
     }
 
 
-    public Movie(long id, String name, Coordinates coordinates, String creationDate, Long oscarsCount, MovieGenre genre, MpaaRating mpaaRating, Person operator) {
-        //setId();
-        this.id = id;
-        this.name = name;
-        this.coordinates = coordinates;
-        this.creationDate = creationDate;
-        this.oscarsCount = oscarsCount;
-        this.genre = genre;
-        this.mpaaRating = mpaaRating;
-        this.operator = operator;
-    }
+//    public Movie(long id, String name, Coordinates coordinates, String creationDate, Long oscarsCount, MovieGenre genre, MpaaRating mpaaRating, Person operator) {
+//        //setId();
+//        this.id = id;
+//        this.name = name;
+//        this.coordinates = coordinates;
+//        this.creationDate = creationDate;
+//        this.oscarsCount = oscarsCount;
+//        this.genre = genre;
+//        this.mpaaRating = mpaaRating;
+//        this.operator = operator;
+//    }
 
     //    Set<Long> Id = new HashSet<>();
 //    // @NotNull
@@ -109,7 +109,7 @@ public class Movie implements Comparable<Movie> {
 
     public void setOscarsCount(Long oscarsCount) throws InvalidAttributeValueException {
         if (oscarsCount == null || oscarsCount <= 0)
-            throw new InvalidAttributeValueException("Количество оскаров не может равнять 0 или null");
+            throw new InvalidAttributeValueException("Количество оскаров не может равнятьcя 0 или null");
         this.oscarsCount = oscarsCount;
     }
 

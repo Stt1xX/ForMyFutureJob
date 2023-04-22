@@ -10,7 +10,7 @@ public class SumOfOscarsCount extends CollectionCommand implements Command {
         super(collectionManager);
     }
 
-    public void execute() {
+    public void execute(String arg) {
         System.out.println(collectionManager.sumOfOscarsCount());
     }
 

@@ -9,7 +9,7 @@ public class Info extends CollectionCommand implements Command {
         super(collectionManager);
     }
 
-    public void execute() {
+    public void execute(String arg) {
         System.out.println("Справка:");
         System.out.println("Дата инициализации коллекции: " + collectionManager.getInitializationDate());
         System.out.println("Количество элементов: " + collectionManager.getCurrency());

@@ -19,6 +19,7 @@ import java.io.StringReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  * A Class for all file operations and XML marshalling.
@@ -84,6 +85,28 @@ public class FileManager extends CollectionManager {
             FileManager fileManager = (FileManager) unmarshaller.unmarshal(reader);
             CollectionManager collectionManager = new CollectionManager();
             collectionManager.arrayDeque = fileManager.movies;
+            ArrayList<Long> allId = new ArrayList<>();
+            for(Movie movieForCheck: collectionManager.arrayDeque) {
+                if (!allId.contains(movieForCheck.getId())){
+                    allId.add(movieForCheck.getId());
+                }
+                else{
+                    System.out.println("Iсходный xml файл некорректный, " +
+                            "убедитесь, что у всех фильмов разное поле id.\nНапишите 'y' " +
+                            "если хотите продолжить с пустой коллекцией " +
+                            "и любой другой символ если хотите преравть программу." );
+                    Scanner scannerForConsole = new Scanner(System.in);
+                    String otvet = scannerForConsole.nextLine();
+                    if (otvet.equals("y")){
+                        return new CollectionManager();
+                    }
+                    else{
+                        System.out.println("Работа программы завершена.");
+                        System.exit(0);
+                    }
+                }
+
+            }
             return collectionManager;
         } catch (IOException e) {
             System.out.println("Убедитесь, что в переменной окружения правильный путь.");
@@ -93,13 +116,13 @@ public class FileManager extends CollectionManager {
         return new CollectionManager();
     }
 
-    public Scanner getScanner(String scriptAdress) {
-        Path path = Paths.get(scriptAdress);
-        try {
-            return new Scanner(path);
-        } catch (IOException e) {
-            System.out.println("Убедитесь, что в переменной окружения правильный путь.");
-        }
-        return null;
-    }
+//    public Scanner getScanner(String scriptAdress) {
+//        Path path = Paths.get(scriptAdress);
+//        try {
+//            return new Scanner(path);
+//        } catch (IOException e) {
+//            System.out.println("Убедитесь, что в переменной окружения правильный путь.");
+//        }
+//        return null;
+//    }
 }

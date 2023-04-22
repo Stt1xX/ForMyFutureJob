@@ -2,6 +2,8 @@ package fergie.me.Commands;
 
 import fergie.me.CollectionManager;
 
+import java.util.NoSuchElementException;
+
 public class RemoveHead extends CollectionCommand implements Command {
     String description = "remove_head : вывести первый элемент коллекции и удалить его";
 
@@ -9,11 +11,11 @@ public class RemoveHead extends CollectionCommand implements Command {
         super(collectionManager);
     }
 
-    public void execute() {
+    public void execute(String arg) {
         try {
             collectionManager.removeHead();
             System.out.println("Первый элемент коллекции удален.");
-        } catch (NullPointerException e) {
+        } catch (NoSuchElementException e) {
             System.out.println("В коллекции нет элементов.");
         }
     }

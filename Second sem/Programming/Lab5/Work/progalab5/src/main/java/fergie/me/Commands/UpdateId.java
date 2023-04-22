@@ -13,16 +13,15 @@ public class UpdateId extends InputCommand implements Command {
         super(collectionManager, scanner);
     }
 
-    public void execute() {
-        System.out.println("Введите id");
+    public void execute(String arg) {
         try {
-            String id = scanner.nextLine();
+            String id = arg;
             Long correctId = Long.parseLong(id);
 
-            if (collectionManager.checkID(correctId)) {
+            if (this.collectionManager.checkID(correctId)) {
                 Movie movie = Movie.createNewMovie(this.scanner);
                 movie.setId(correctId);
-                collectionManager.updateMovie(movie);
+                this.collectionManager.updateMovie(movie);
                 System.out.println("Фильм успешно обновлен.");
             } else {
                 System.out.println("ID не найден в текущей коллекции");

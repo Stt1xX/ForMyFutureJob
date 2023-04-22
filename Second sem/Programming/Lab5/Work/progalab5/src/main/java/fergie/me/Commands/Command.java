@@ -8,7 +8,7 @@ import javax.management.InvalidAttributeValueException;
  * @version 0.1
  */
 public interface Command {
-    void execute();
+    void execute(String arg);
     String getDescription();
 
 }

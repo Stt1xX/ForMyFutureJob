@@ -9,7 +9,7 @@ public class Show extends CollectionCommand implements Command {
         super(collectionManager);
     }
 
-    public void execute() {
+    public void execute(String arg) {
         collectionManager.show();
     }
 

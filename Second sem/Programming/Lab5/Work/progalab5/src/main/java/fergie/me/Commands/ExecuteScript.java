@@ -4,6 +4,7 @@ import fergie.me.CollectionManager;
 import fergie.me.CommandManager;
 
 import java.io.IOException;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.NoSuchElementException;
@@ -17,30 +18,60 @@ public class ExecuteScript extends InputCommand implements Command {
     public ExecuteScript(CollectionManager collectionManager, Scanner scanner) {
         super(collectionManager, scanner);
     }
-    public void execute(){
+    public void execute(String str){
         if (counter < 20) {
-            System.out.println("Введите путь до скрипта (включая его имя):");
             counter += 1;
-            Path path = Paths.get(scanner.nextLine());
+            Path path = Paths.get(str);
             try {
                 Scanner scannerForScript = new Scanner(path);
                 String arg[];
                 CommandManager commandManagerForScript = new CommandManager(collectionManager, scannerForScript);
+//                while (scannerForScript.hasNextLine()) {
+//                    String s = (scannerForScript.nextLine());
+//                    arg = s.split("\s+");
+//                    if (arg.length == 1) {
+//                        if (s.equals("exit")) {
+//                            break;
+//                        }
+//                        try {
+//                            if (arg.length == 2)
+//                                commandManagerForScript.getCommands().get(arg[0].toLowerCase()).execute(arg[1]);
+//                            else
+//                                commandManagerForScript.getCommands().get(s.toLowerCase()).execute("");
+//                        } catch (NullPointerException e) {
+//                            System.out.println("Введенной команды не существует.");
+//                        }
+//                    } else
+//                        System.out.println("Слишком длинная команда.");
+//
+//                }
                 while (scannerForScript.hasNextLine()) {
+
                     String s = (scannerForScript.nextLine());
                     arg = s.split("\s+");
-                    if (arg.length == 1) {
-                        if (s.equals("exit")) {
-                            break;
+                    try{
+//                    if (arg.length == 2)
+////                        commandManager.getCommands().get(arg[0].toLowerCase()).execute(arg[1] + ' ' + arg[2]);
+////                    else
+////                        commandManager.getCommands().get(s.toLowerCase()).execute("");
+                        StringBuilder strForScript = new StringBuilder();
+                        for (String value : arg) {
+                            strForScript.append(value).append(" ");
                         }
-                        try {
-                            commandManagerForScript.getCommands().get(s).execute();
-                        } catch (NullPointerException e) {
-                            System.out.println("Введенной команды не существует.");
-                        }
-                    } else
-                        System.out.println("Слишком длинная команда.");
-
+                        if (arg.length > 1)
+                            commandManagerForScript.getCommands().get(arg[0].toLowerCase()).execute(strForScript.
+                                    substring(arg[0].length() + 1, strForScript.length() - 1));
+                        else
+                            commandManagerForScript.getCommands().get(arg[0].toLowerCase()).execute("");
+                    } catch (NullPointerException e) {
+                        System.out.println("Введенной команды не существует.");
+                    } catch (InvalidPathException e){
+                        System.out.println("Путь к файлу не должен содержать следующих знаков: * ? < > |");
+                    } catch (IllegalArgumentException e){
+                        System.out.println("Данная команда не имеет аргументов.");
+                    }
+//            } else
+//                System.out.println("Слишком длинная команда.");
                 }
                 System.out.println("Скрипт выполнен.");
             } catch (IOException e) {

@@ -9,9 +9,9 @@ public class Save extends CollectionCommand implements Command {
         super(collectionManager);
     }
 
-    public void execute() {
+    public void execute(String arg) {
         this.collectionManager.save();
-        System.out.println("Файл успешно сохранен. ");
+        System.out.println("Файл успешно сохранен.");
     }
 
     public String getDescription() {

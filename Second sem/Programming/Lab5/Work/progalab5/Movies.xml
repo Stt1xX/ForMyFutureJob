@@ -5,8 +5,8 @@
             <y>765.0</y>
             <x>32.0</x>
         </coordinates>
-        <genre>ACTION</genre>
-        <id>2</id>
+        <genre>DRAMA</genre>
+        <id>1</id>
         <mpaaRating>PG</mpaaRating>
         <name>Terminator</name>
         <operator>
@@ -21,29 +21,29 @@
             <name>Dr. Dre</name>
             <nationality>VATICAN</nationality>
         </operator>
-        <oscarsCount>2</oscarsCount>
+        <oscarsCount>12</oscarsCount>
     </movies>
     <movies>
         <coordinates>
             <y>2.0</y>
-            <x>4.0</x>
+            <x>21.0</x>
         </coordinates>
         <genre>ACTION</genre>
-        <id>1</id>
+        <id>2</id>
         <mpaaRating>G</mpaaRating>
-        <name>test</name>
+        <name>loc</name>
         <operator>
             <eyeColor>RED</eyeColor>
             <height>12</height>
             <location>
-                <name>loc</name>
+                <name>dsal</name>
                 <x>0.0</x>
-                <y>321.0</y>
+                <y>32.0</y>
                 <z>0</z>
             </location>
-            <name>MASha</name>
+            <name>lp</name>
             <nationality>FRANCE</nationality>
         </operator>
-        <oscarsCount>3</oscarsCount>
+        <oscarsCount>10</oscarsCount>
     </movies>
 </fileManager>

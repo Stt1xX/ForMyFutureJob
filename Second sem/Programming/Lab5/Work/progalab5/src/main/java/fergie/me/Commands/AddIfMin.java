@@ -13,7 +13,7 @@ public class AddIfMin extends InputCommand implements Command {
         super(collectionManager, scanner);
     }
 
-    public void execute(){
+    public void execute(String arg){
         Movie movie = Movie.createNewMovie(scanner);
         collectionManager.addIfMin(movie);
 

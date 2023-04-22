@@ -1,10 +1,9 @@
-execute_script
-C:\Users\timra\Desktop\ForMyFutureJob\Second sem\Programming\Lab5\Work\progalab5\script.txt
+execute_script C:\Users\timra\Desktop\ForMyFutureJob\Second sem\Programming\Lab5\Work\progalab5\script.txt
 add
 test
 3
 G
-ACTION
+DRAMA
 4
 2
 MASha

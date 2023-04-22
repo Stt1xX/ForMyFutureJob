@@ -9,7 +9,7 @@ public class Clear extends CollectionCommand implements Command {
         super(collectionManager);
     }
 
-    public void execute() {
+    public void execute(String arg) {
         collectionManager.clear();
         System.out.println("Коллекция успешно очищена.");
     }

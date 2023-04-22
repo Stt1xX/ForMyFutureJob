@@ -17,7 +17,7 @@ public class CollectionManager {
     protected ArrayDeque<Movie> arrayDeque;
     private LocalDate initializationDate;
 
-    private long current_id = 1;
+    private Long current_id = 1L;
     private long currency = 0;
     String className;
 
@@ -33,15 +33,20 @@ public class CollectionManager {
         this.arrayDeque = fileManager.arrayDeque;
     }
 
-    public void addAll(Collection<Movie> collection) {
-        for (Movie movie : collection) {
-            movie.setId(current_id);
-            arrayDeque.add(movie);
-            current_id++;
-        }
-    }
+//    public void addAll(Collection<Movie> collection) {
+//        for (Movie movie : collection) {
+//            movie.setId(current_id);
+//            arrayDeque.add(movie);
+//            current_id++;
+//        }
+//    }
 
     public void addElement(Movie movie) {
+        ArrayList<Long> allId = new ArrayList<>();
+        for (Movie movieForCheck: arrayDeque){
+            allId.add(movieForCheck.getId());
+        }
+        while(allId.contains(current_id)) current_id++;
         movie.setId(current_id);
         arrayDeque.add(movie);
         current_id++;
@@ -63,14 +68,22 @@ public class CollectionManager {
     }
 
     public void updateMovie(Movie movie) {
-        for (Movie currentMovie : this.arrayDeque) {
+        List<Movie> list = new ArrayList<>(this.arrayDeque);
+        for (Movie currentMovie : list) {
             if (currentMovie.getId().equals(movie.getId())) {
-                currentMovie = movie;
+                list.set(list.indexOf(currentMovie), movie);
+                this.arrayDeque = new ArrayDeque<>(list);
             }
         }
     }
 
     public void addIfMin(Movie movie) {
+        ArrayList<Long> allId = new ArrayList<>();
+        for (Movie movieForCheck: arrayDeque){
+            allId.add(movieForCheck.getId());
+        }
+
+        while(allId.contains(current_id)) current_id++;
         if (arrayDeque.isEmpty()) {
             movie.setId(current_id);
             arrayDeque.add(movie);
@@ -91,11 +104,12 @@ public class CollectionManager {
             System.out.println("Выбранный фильм не будет сохранен, т.к он больше минимального.");
     }
 
-    public void removeIfGreater(Movie movie) {
+    public void removeIfGreater(Long oscars){
         List<Movie> moviesForDelete = new ArrayList<>();
-
+        //Long oscars = Long.parseLong(arg);
         for (Movie m : arrayDeque) {
-            if (m.compareTo(movie) > 0) {
+            //if (m.compareTo(movie) > 0) {
+            if (m.getOscarsCount() > oscars) {
                 moviesForDelete.add(m);
             }
         }
@@ -103,14 +117,12 @@ public class CollectionManager {
     }
 
     public void removeHead() {
-        this.arrayDeque.removeFirst();
+        System.out.println(this.arrayDeque.removeFirst());
     }
 
-    public void removeById(Scanner sc) {
+    public void removeById(String argument) {
         try {
-            System.out.println("Введите id фильма, который необходимо удалить:");
-            String currentId = sc.nextLine();
-            Long id = Long.parseLong(currentId);
+            Long id = Long.parseLong(argument);
             Movie del = null;
             for (Movie currentMovie : this.arrayDeque) {
                 if (currentMovie.getId() == id) {
@@ -135,10 +147,10 @@ public class CollectionManager {
         return oscars;
     }
 
-    public Integer countGreaterThanGenre(MovieGenre genre) {
+    public Integer countGreaterThanGenre(String str){
         Integer count = 0;
         for (Movie movie : arrayDeque) {
-            if (movie.getGenre().ordinal() > genre.ordinal()) {
+            if (movie.getGenre().ordinal() > MovieGenre.valueOf(str).ordinal()) {
                 count++;
             }
         }
@@ -155,11 +167,10 @@ public class CollectionManager {
     }
 
 
-    public void groupCountingByGenre(Scanner scanner) throws IllegalArgumentException {
+    public void groupCountingByGenre(Scanner scanner, String arg) throws IllegalArgumentException {
         int count = 0;
         Movie value = null;
-        System.out.println("Введите жанр: ");
-        MovieGenre genre = MovieGenre.valueOf(scanner.nextLine());
+        MovieGenre genre = MovieGenre.valueOf(arg);
         Map<Movie, MovieGenre> movies = new HashMap<>();
         for (Movie movie : arrayDeque) {
             if (movie.getGenre().equals(genre)) {

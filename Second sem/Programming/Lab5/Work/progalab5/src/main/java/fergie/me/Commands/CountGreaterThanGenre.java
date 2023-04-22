@@ -13,17 +13,18 @@ public class CountGreaterThanGenre extends InputCommand implements Command {
         super(collectionManager, scanner);
     }
 
-    public void execute() {
+    public void execute(String arg) {
         while (true) {
             try {
-                System.out.println("Выберите жанр из списка: ");
-                System.out.println(Arrays.toString(MovieGenre.values()));
-                String genre = scanner.nextLine();
-                Integer count = collectionManager.countGreaterThanGenre(MovieGenre.valueOf(genre));
+                //System.out.println("Выберите жанр из списка: ");
+                //System.out.println(Arrays.toString(MovieGenre.values()));
+                //String genre = scanner.nextLine();
+                Integer count = collectionManager.countGreaterThanGenre(arg);
                 System.out.println("Количество элементов: " + count);
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("Введено не существующее значение. Попробуйте еще раз: ");
+                System.out.println("Введенный аргумент не подходит.");
+                return;
             } catch (NullPointerException e) {
                 System.out.println("У заданного фильма отсутствует жанр.");
             }

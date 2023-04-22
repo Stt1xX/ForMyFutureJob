@@ -16,12 +16,14 @@ public class Help extends CollectionCommand implements Command{
         this.map = map;
     }
 
-    public void execute(){
-        System.out.println("Список доступных команд:");
-        for (Command cmd: map.values()) {
-            System.out.println(cmd.getDescription() + "\n");
+    public void execute(String arg) throws IllegalArgumentException{
+        if (arg.equals("")) {
+            System.out.println("Список доступных команд:");
+            for (Command cmd : map.values()) {
+                System.out.println(cmd.getDescription() + "\n");
+            }
         }
-
+        else throw new IllegalArgumentException();
     }
     public String getDescription(){
         return description;
