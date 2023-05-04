@@ -21,7 +21,7 @@ public class CountGreaterThanGenre extends InputCommand implements Command {
                 System.out.println("Количество элементов: " + count);
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("Введенный аргумент не подходит.");
+                System.out.println("Указанный аргумент не подходит.");
                 return;
             } catch (NullPointerException e) {
                 System.out.println("У заданного фильма отсутствует жанр.");

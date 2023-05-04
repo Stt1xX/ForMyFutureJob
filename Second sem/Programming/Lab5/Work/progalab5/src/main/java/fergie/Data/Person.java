@@ -27,12 +27,16 @@ public class Person {
     }
 
     public void setHeight(String height) throws InvalidAttributeValueException {
-        setHeight(Long.parseLong(height));
+        if (height.equals("")){
+            this.height = null;
+        }
+        else
+            setHeight(Long.parseLong(height));
     }
 
     public void setHeight(Long height) throws InvalidAttributeValueException {
-        if (height <= 0 || height == null)
-            throw new InvalidAttributeValueException("Рост оператора не может быть меньше 0 и не может быть null");
+        if (height <= 0)
+            throw new InvalidAttributeValueException("Рост оператора не может быть меньше 0");
         this.height = height;
     }
 

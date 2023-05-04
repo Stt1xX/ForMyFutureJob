@@ -14,7 +14,7 @@ public class RemoveById extends CollectionCommand implements Command {
     public void execute(String argument) {
         try {collectionManager.removeById(argument);}
         catch (NumberFormatException e){
-            System.out.println("Введенный аргумент не подходит.");
+            System.out.println("Указанный аргумент не подходит.");
         }
     }
 

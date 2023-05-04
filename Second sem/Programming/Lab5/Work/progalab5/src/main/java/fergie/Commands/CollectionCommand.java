@@ -10,6 +10,12 @@ import fergie.CollectionManager;
 public abstract class CollectionCommand implements Command {
     protected CollectionManager collectionManager;
 
+    protected static boolean status = true;
+
+    public static void changeStatus(){
+        status = !status;
+    }
+
     public CollectionCommand(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
 

@@ -1,30 +1,36 @@
 package fergie.Data;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 import javax.management.InvalidAttributeValueException;
+import java.util.InputMismatchException;
 import java.util.Objects;
 
 @XmlRootElement
 public class Location {
-    private float x;
-    private float y;
-    private long z;
+
+    private Long z;
+    private Float y;
+    private Float x;
     private String name; //Длина строки не должна быть больше 870, Поле не может быть null
 
-    public float getX() {
+    public Float getX() {
         return x;
     }
 
     public void setX(String x) throws InvalidAttributeValueException {
-        setY(Float.parseFloat(x));
+        setX(Float.parseFloat(x));
     }
 
-    public void setX(float x) {
-        this.x = x;
+    public void setX(Float x) throws InvalidAttributeValueException {
+        if (!CheckData.checkFloat(x)){
+            throw new InvalidAttributeValueException("");
+        } else
+            this.x = x;
     }
 
-    public float getY() {
+    public Float getY() {
         return y;
     }
 
@@ -32,20 +38,26 @@ public class Location {
         setY(Float.parseFloat(y));
     }
 
-    public void setY(float y) {
-        this.y = y;
+    public void setY(Float y) throws InvalidAttributeValueException {
+        if (!CheckData.checkFloat(y)){
+            throw new InvalidAttributeValueException("");
+        } else
+            this.y = y;
     }
 
-    public long getZ() {
+    public Long getZ() {
         return z;
     }
 
     public void setZ(String z) throws InvalidAttributeValueException {
-        setY(Long.parseLong(z));
+        setZ(Long.parseLong(z));
     }
 
-    public void setZ(long z) {
-        this.z = z;
+    public void setZ(Long z) throws InvalidAttributeValueException{
+        if (!CheckData.checkLong(z)){
+            throw new InvalidAttributeValueException("");
+        } else
+            this.z = z;
     }
 
     public String getName() {
@@ -73,6 +85,6 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Coordinates " + name + "{x= " + x + ", y= " + y + '}';
+        return  "x = " + x + ", y = " + y + ", z = " + z;
     }
 }

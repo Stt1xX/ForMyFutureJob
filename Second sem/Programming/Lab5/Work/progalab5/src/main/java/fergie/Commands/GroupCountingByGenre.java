@@ -1,21 +1,22 @@
 package fergie.Commands;
 
 import fergie.CollectionManager;
+import fergie.CommandManager;
 
 import java.util.Scanner;
 
-public class GroupCountingByGenre extends InputCommand implements Command {
+public class GroupCountingByGenre extends CollectionCommand implements Command {
     String description = "group_counting_by_genre : сгруппировать элементы коллекции по значению поля Genre, " +
             " вывести количество элементов в каждой группе";
 
-    public GroupCountingByGenre(CollectionManager collectionManager, Scanner scanner) {
-        super(collectionManager, scanner);
+    public GroupCountingByGenre(CollectionManager collectionManager) {
+        super(collectionManager);
 
     }
 
-    public void execute(String arg) {
+    public void execute(String a) {
         try {
-            collectionManager.groupCountingByGenre(scanner, arg);
+            collectionManager.groupCountingByGenre();
         } catch (IllegalArgumentException e) {
             System.out.println("Такого жанра не существует. ");
         }

@@ -1,5 +1,6 @@
 package fergie.Data;
 
+import fergie.Commands.ExecuteScript;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import javax.management.InvalidAttributeValueException;
@@ -80,7 +81,7 @@ public class Movie implements Comparable<Movie> {
     }
 
     public Coordinates getCoordinates() {
-        return coordinates;
+        return this.coordinates;
     }
 
     public void setCoordinates(Coordinates coordinates) throws InvalidAttributeValueException {
@@ -90,12 +91,14 @@ public class Movie implements Comparable<Movie> {
             this.coordinates = coordinates;
     }
 
-    public String getCreationDate() {
-        return creationDate;
-    }
-
     public void setCreationDate(java.time.LocalDate creationDate) {
         this.creationDate = creationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+    public void setCreationDate(String creationDate){
+        this.creationDate = creationDate;
+    }
+    public String getCreationDate() {
+        return creationDate;
     }
 
     public Long getOscarsCount() {
@@ -107,9 +110,10 @@ public class Movie implements Comparable<Movie> {
     }
 
     public void setOscarsCount(Long oscarsCount) throws InvalidAttributeValueException {
-        if (oscarsCount == null || oscarsCount <= 0)
+        if (oscarsCount <= 0 | !CheckData.checkLong(oscarsCount))
             throw new InvalidAttributeValueException("Количество оскаров не может равнятьcя 0 или null");
-        this.oscarsCount = oscarsCount;
+        else
+            this.oscarsCount = oscarsCount;
     }
 
     public MovieGenre getGenre() {
@@ -121,14 +125,11 @@ public class Movie implements Comparable<Movie> {
             throw new InvalidAttributeValueException("Значение поля жанр не может быть null");
         this.genre = genre;
     }
-
     public MpaaRating getMpaaRating() {
         return this.mpaaRating;
     }
 
-    public void setMpaaRating(MpaaRating mpaaRating) throws InvalidAttributeValueException {
-        if (mpaaRating == null)
-            throw new InvalidAttributeValueException("Значение поля MpaaRating не может быть null");
+    public void setMpaaRating(MpaaRating mpaaRating)  {
         this.mpaaRating = mpaaRating;
     }
 
@@ -145,40 +146,58 @@ public class Movie implements Comparable<Movie> {
     //переопределить equals hashcode и toString для movie
     @Override
     public String toString() {
-        return "Название: " + this.name + " | id: " + this.id + " ";
+        return "Название: " + this.name + " | id: " + this.id
+                + "\n Дата создания: " + this.getCreationDate()
+                + "\n Количество оскаров: " + this.getOscarsCount()
+                + "\n Жанр: " + this.getGenre()
+                + "\n Координаты: " + this.getCoordinates()
+                + "\n Рейтинг MPAA: " + this.getMpaaRating()
+                + "\n имя режиссера: " + this.getOperator().getName()
+                + "\n Цвет глаз режиссера : " + this.getOperator().getEyeColor()
+                + "\n Национальность режиссера: " + this.getOperator().getNationality()
+                + "\n Рост режиссера: " + this.getOperator().getHeight()
+                + "\n Координаты оператора: " + this.getOperator().getLocation()
+                + "\n Название локации: " + this.getOperator().getLocation().getName();
     }
 
     public static Movie createNewMovie(Scanner scanner) {
-        System.out.println("Введите параметры.");
+        if (ExecuteScript.getMode() != 2)
+            System.out.println("Введите параметры.");
         Movie movie = new Movie();
+        movie.setCreationDate(java.time.LocalDate.now());
 
         { // movie: movieGenre, MpaaRating, coordinates
-            movie.setCreationDate(LocalDate.from(LocalDateTime.now()));
-            System.out.println("Введите название фильма:");
+            if (ExecuteScript.getMode() != 2)
+                System.out.println("Введите название фильма:");
             Checker.Setter checker = () -> {
                 movie.setName(scanner.nextLine());
             };
             Checker.checkData(checker);
 
-
-            System.out.println("Введите количество оскаров:");
+            if (ExecuteScript.getMode() != 2)
+                System.out.println("Введите количество оскаров:");
 
             checker = () -> {
                 movie.setOscarsCount(scanner.nextLine());
             };
             Checker.checkData(checker);
 
-
-            System.out.println("Выберите из списка MpaaRating и введите его:"
-                    + "\n" + Arrays.toString(MpaaRating.values()));
+            if (ExecuteScript.getMode() != 2)
+                System.out.println("Выберите из списка MpaaRating и введите его:"
+                        + "\n" + Arrays.toString(MpaaRating.values()));
             checker = () -> {
-                movie.setMpaaRating(MpaaRating.valueOf(scanner.nextLine()));
+                String mpaa = scanner.nextLine();
+                if (mpaa.equals("")){
+                    movie.mpaaRating = null;
+                } else movie.setMpaaRating(MpaaRating.valueOf(mpaa));
             };
             Checker.checkData(checker);
 
 
-            System.out.println("Выберите жанр из списка: ");
-            System.out.println(Arrays.toString(MovieGenre.values()));
+            if (ExecuteScript.getMode() != 2) {
+                System.out.println("Выберите жанр из списка: ");
+                System.out.println(Arrays.toString(MovieGenre.values()));
+            }
             checker = () -> {
                 movie.setGenre(MovieGenre.valueOf(scanner.nextLine()));
             };
@@ -187,12 +206,14 @@ public class Movie implements Comparable<Movie> {
             //coordinates
             {
                 Coordinates coordinates = new Coordinates();
-                System.out.println("Введите координаты x: ");
+                if (ExecuteScript.getMode() != 2)
+                    System.out.println("Введите координаты x: ");
                 checker = () -> {
                     coordinates.setX(scanner.nextLine()); //сделать проверку на null
                 };
                 Checker.checkData(checker);
-                System.out.println("Введите координаты y: ");
+                if (ExecuteScript.getMode() != 2)
+                    System.out.println("Введите координаты y: ");
                 checker = () -> {
                     coordinates.setY(scanner.nextLine());
                 };
@@ -208,38 +229,44 @@ public class Movie implements Comparable<Movie> {
 
             { //person
                 Person operator = new Person();
-                System.out.println("Введите имя режиссера:");
+                if (ExecuteScript.getMode() != 2)
+                    System.out.println("Введите имя режиссера:");
                 checker = () -> {
                     operator.setName(scanner.nextLine());
                 };
                 Checker.checkData(checker);
 
                 //color
-                System.out.println("Выберите цвет глаз режиссера из предложенных и введите его: ");
-                System.out.println(Arrays.toString(Color.values()));
+                if (ExecuteScript.getMode() != 2) {
+                    System.out.println("Выберите цвет глаз режиссера из предложенных и введите его: ");
+                    System.out.println(Arrays.toString(Color.values()));
+                }
                 checker = () -> {
                     operator.setEyeColor(Color.valueOf(scanner.nextLine()));
                 };
                 Checker.checkData(checker);
 
                 //country
-                System.out.println("Введите национальность оператора: ");
-                System.out.println(Arrays.toString(Country.values()));
+                if (ExecuteScript.getMode() != 2) {
+                    System.out.println("Введите национальность оператора: ");
+                    System.out.println(Arrays.toString(Country.values()));
+                }
                 checker = () -> {
                     operator.setNationality(Country.valueOf(scanner.nextLine()));
                 };
                 Checker.checkData(checker);
 
                 //height
-                System.out.println("Введите рост режиссера:");
+                if (ExecuteScript.getMode() != 2)
+                    System.out.println("Введите рост режиссера:");
                 checker = () -> {
                     operator.setHeight(scanner.nextLine());
                 };
                 Checker.checkData(checker);
-
                 { //location + coordinates
                     Location location = new Location();
-                    System.out.println("Введите построчно координаты (x,y) оператора в формате 0.0 (КАКиЕ ЕЩЕ КООРДиНАТЫ ОПЕРАТОРА?????????): ");
+                    if (ExecuteScript.getMode() != 2)
+                        System.out.println("Введите построчно координаты (x,y) оператора в формате 0.0 (КАКиЕ ЕЩЕ КООРДиНАТЫ ОПЕРАТОРА?????????): ");
                     checker = () -> {
                         location.setX(scanner.nextLine());
                     };
@@ -248,12 +275,14 @@ public class Movie implements Comparable<Movie> {
                         location.setY(scanner.nextLine());
                     };
                     Checker.checkData(checker);
-                    System.out.println("Введите координату z оператора (long): ");
+                    if (ExecuteScript.getMode() != 2)
+                        System.out.println("Введите координату z оператора (long): ");
                     checker = () -> {
                         location.setZ(scanner.nextLine());
                     };
                     Checker.checkData(checker);
-                    System.out.println("Введите название локации:");
+                    if (ExecuteScript.getMode() != 2)
+                        System.out.println("Введите название локации:");
                     checker = () -> {
                         location.setName(scanner.nextLine());
                     };

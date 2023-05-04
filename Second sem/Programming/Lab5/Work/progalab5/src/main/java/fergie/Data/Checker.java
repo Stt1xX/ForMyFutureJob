@@ -21,7 +21,7 @@ public class Checker {
                 break;
             } catch (InvalidAttributeValueException e) {
                 System.out.println(e.getMessage());
-                System.out.println("Хрень ввел. Введите правильные данные: ");
+                System.out.println("Введите правильные данные: ");
             } catch (NumberFormatException e) {
                 System.out.println("Введен неправильный тип данных.");
             } catch (IllegalArgumentException e) {

@@ -1,9 +1,6 @@
 package fergie;
 
-import fergie.Data.Coordinates;
-import fergie.Data.Location;
-import fergie.Data.Movie;
-import fergie.Data.Person;
+import fergie.Data.*;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -87,12 +84,31 @@ public class FileManager extends CollectionManager {
             collectionManager.arrayDeque = fileManager.movies;
             ArrayList<Long> allId = new ArrayList<>();
             for(Movie movieForCheck: collectionManager.arrayDeque) {
-                if (!allId.contains(movieForCheck.getId())){
+                if (
+                        movieForCheck.getOperator().getNationality() != null
+                        && movieForCheck.getOperator().getEyeColor() != null
+                        && movieForCheck.getOperator().getLocation() != null
+                        && movieForCheck.getId() != null
+                        && movieForCheck.getOperator() != null
+                        && movieForCheck.getCreationDate() != null
+                        && movieForCheck.getName() != null
+                        && movieForCheck.getGenre() != null
+                        && movieForCheck.getCoordinates() != null
+                        && movieForCheck.getOscarsCount() != null
+                        && movieForCheck.getOperator().getName() != null
+                        && movieForCheck.getCoordinates().getY() != null
+                        && movieForCheck.getCoordinates().getX() != null
+                        && movieForCheck.getOperator().getLocation().getX() != null
+                        && movieForCheck.getOperator().getLocation().getY() != null
+                        && movieForCheck.getOperator().getLocation().getZ() != null
+                        && !allId.contains(movieForCheck.getId())
+                ){
                     allId.add(movieForCheck.getId());
                 }
                 else{
-                    System.out.println("Iсходный xml файл некорректный, " +
-                            "убедитесь, что у всех фильмов разное поле id.\nНапишите 'y' " +
+                    System.out.println("исходный xml файл некорректный, " +
+                            "убедитесь, что у всех фильмов разное поле id,enum заданы правильно, а также, " +
+                            "все необходимые поля заполнены.\nНапишите 'y' " +
                             "если хотите продолжить с пустой коллекцией " +
                             "и любой другой символ если хотите преравть программу." );
                     Scanner scannerForConsole = new Scanner(System.in);
@@ -111,7 +127,7 @@ public class FileManager extends CollectionManager {
         } catch (IOException e) {
             System.out.println("Убедитесь, что в переменной окружения правильный путь.");
         } catch (JAXBException e) {
-            System.out.println("Предупреждение: коллекция пуста");
+            System.out.println("Маша права, файл не валидный.");
         }
         return new CollectionManager();
     }

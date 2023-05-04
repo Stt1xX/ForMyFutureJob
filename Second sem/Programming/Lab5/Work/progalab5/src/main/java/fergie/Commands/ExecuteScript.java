@@ -13,12 +13,21 @@ import java.util.Scanner;
 public class ExecuteScript extends InputCommand implements Command {
 
     private static int counter; //для рекурсии
+    private static int mode;
+
     String description = "execute_script file_name: считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.";
 
+    public static int getMode(){
+        return mode;
+    }
+    public static void setMode(int mode_type){
+        mode = mode_type;
+    }
     public ExecuteScript(CollectionManager collectionManager, Scanner scanner) {
         super(collectionManager, scanner);
     }
     public void execute(String str){
+        setMode(2);
         if (counter < 20) {
             counter += 1;
             Path path = Paths.get(str);
@@ -64,7 +73,8 @@ public class ExecuteScript extends InputCommand implements Command {
                         else
                             commandManagerForScript.getCommands().get(arg[0].toLowerCase()).execute("");
                     } catch (NullPointerException e) {
-                        System.out.println("Введенной команды не существует.");
+                        System.out.println("Указана несуществующая команда (возможно, в скрипте ошибка).");
+                        return;
                     } catch (InvalidPathException e){
                         System.out.println("Путь к файлу не должен содержать следующих знаков: * ? < > |");
                     } catch (IllegalArgumentException e){
@@ -83,7 +93,7 @@ public class ExecuteScript extends InputCommand implements Command {
             }
         }
         else{
-            System.out.println("Блокировка скрипта, из-за рекурсии.");
+            System.out.println("Блокировка скрипта из-за рекурсии.");
         }
     }
 

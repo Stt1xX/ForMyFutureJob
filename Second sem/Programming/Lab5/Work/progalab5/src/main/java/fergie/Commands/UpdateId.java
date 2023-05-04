@@ -27,7 +27,7 @@ public class UpdateId extends InputCommand implements Command {
                 System.out.println("ID не найден в текущей коллекции");
             }
         } catch (NumberFormatException e) {
-            System.out.println("Вы ввели неподходящие данные. Попробуйте запустить команду еще раз.");
+            System.out.println("Вы указали неподходящие данные. Попробуйте запустить команду еще раз.");
         } catch (NullPointerException e) {
             System.out.println("В коллекции нет элементов.");
         }
@@ -38,4 +38,3 @@ public class UpdateId extends InputCommand implements Command {
         return description;
     }
 }
-

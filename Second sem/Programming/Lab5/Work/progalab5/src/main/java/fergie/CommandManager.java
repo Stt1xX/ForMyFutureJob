@@ -32,14 +32,11 @@ public class CommandManager {
         commands.put("sum_of_oscars_count", new SumOfOscarsCount(collectionManager));
         commands.put("save", new Save(collectionManager));
         commands.put("execute_script", new ExecuteScript(collectionManager, scanner));
-        commands.put("group_counting_by_genre", new GroupCountingByGenre(collectionManager, scanner));
+        commands.put("group_counting_by_genre", new GroupCountingByGenre(collectionManager));
         commands.put("count_greater_than_genre", new CountGreaterThanGenre(collectionManager, scanner));
         commands.put("clear", new Clear(collectionManager));
 
-
     }
-
-
     public Map<String, Command> getCommands() {
         return commands;
     }

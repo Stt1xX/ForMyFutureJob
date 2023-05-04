@@ -1,5 +1,6 @@
 package fergie;
 
+import fergie.Commands.ExecuteScript;
 import fergie.Data.Movie;
 import fergie.Data.MovieGenre;
 
@@ -100,26 +101,26 @@ public class CollectionManager {
             current_id++;
             System.out.println("Фильм успешно добавлен.");
             System.out.println("Фильмов в коллекции:" + arrayDeque.size());
+
         } else
             System.out.println("Выбранный фильм не будет сохранен, т.к он больше минимального.");
     }
 
-    public void removeIfGreater(Long oscars){
+    public void removeIfGreater(Movie movie) {
         List<Movie> moviesForDelete = new ArrayList<>();
-        //Long oscars = Long.parseLong(arg);
-        for (Movie m : arrayDeque) {
-            //if (m.compareTo(movie) > 0) {
-            if (m.getOscarsCount() > oscars) {
+
+        for (Movie m: arrayDeque) {
+            if (m.compareTo(movie) > 0) {
                 moviesForDelete.add(m);
             }
         }
         arrayDeque.removeAll(moviesForDelete);
     }
 
+
     public void removeHead() {
         System.out.println(this.arrayDeque.removeFirst());
     }
-
     public void removeById(String argument) {
         try {
             Long id = Long.parseLong(argument);
@@ -160,14 +161,17 @@ public class CollectionManager {
     public void show() {
         for (Movie movie : arrayDeque) {
             System.out.print(" " + movie.toString() + "\n");
+            for (int i = 0; i < 20; i++){
+                System.out.print("_");
+            }
+            System.out.println("\n");
         }
         System.out.println("Коллекция содержит " + arrayDeque.size() + " элементов.");
         if (arrayDeque.size() == 0)
             System.out.println("Коллекция пуста.");
     }
 
-
-    public void groupCountingByGenre(Scanner scanner, String arg) throws IllegalArgumentException {
+    private void countingByGenre(String arg) throws IllegalArgumentException {
         int count = 0;
         Movie value = null;
         MovieGenre genre = MovieGenre.valueOf(arg);
@@ -178,11 +182,14 @@ public class CollectionManager {
                 count += 1;
             }
         }
-        for (Map.Entry<Movie, MovieGenre> pair : movies.entrySet()) {
-            value = pair.getKey();
-            System.out.println(value);
-        }
         System.out.println("Количество фильмов жанра " + genre + ": " + count);
+        movies.clear();
+    }
+
+    public void groupCountingByGenre() throws IllegalArgumentException {
+        countingByGenre("DRAMA");
+        countingByGenre("ACTION");
+        countingByGenre("TRAGEDY");
     }
 
     public void save() {

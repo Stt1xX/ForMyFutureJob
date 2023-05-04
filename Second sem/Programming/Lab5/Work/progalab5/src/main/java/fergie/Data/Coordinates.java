@@ -2,30 +2,36 @@ package fergie.Data;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 import javax.management.InvalidAttributeValueException;
+import java.util.InputMismatchException;
 import java.util.Objects;
 
 @XmlRootElement
 public class Coordinates {
-    private double x;
-    @XmlElement
+
+    private Double x;
+
     private Float y; //Поле не может быть null
 
-    public double getX() {
+    public Double getX() {
         return x;
     }
 
-    public void setX(String s) {
+    public void setX(String s) throws InvalidAttributeValueException {
         setX(Double.parseDouble(s));
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public void setX(Double x) throws InvalidAttributeValueException{
+        if (!CheckData.checkDouble(x)){
+            throw new InvalidAttributeValueException("");
+        } else
+            this.x = x;
     }
 
-    public double getY() {
-        return y;
+    public Float getY() {
+        return this.y;
     }
 
     public void setY(String y) throws InvalidAttributeValueException {
@@ -33,9 +39,10 @@ public class Coordinates {
     }
 
     public void setY(Float y) throws InvalidAttributeValueException {
-        if (y == null)
-            throw new InvalidAttributeValueException("Значение поля Y не может быть null");
-        this.y = y;
+        if (!CheckData.checkFloat(y)){
+            throw new InvalidAttributeValueException("");
+        } else
+            this.y = y;
     }
    /* @Override
     public boolean equals(Object o) {
@@ -52,9 +59,8 @@ public class Coordinates {
 
     @Override
     public String toString() {
-        return "Coordinates{" + "x=" + x + ", y=" + y + '}';
+        return "x = " + x + ", y = " + y ;
     }
 
 
 }
-
