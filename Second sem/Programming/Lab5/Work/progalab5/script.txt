@@ -1,4 +1,5 @@
 help
+execute_script C:\Users\timra\Desktop\ForMyFutureJob\Second sem\Programming\Lab5\Work\progalab5\script.txt
 add
 test
 3

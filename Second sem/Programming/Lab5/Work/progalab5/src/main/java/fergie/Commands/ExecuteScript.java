@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -15,6 +16,7 @@ public class ExecuteScript extends InputCommand implements Command {
     private static int counter; //для рекурсии
     private static int mode;
 
+    private static ArrayList<String> arrayList = new ArrayList<>();
     String description = "execute_script file_name: считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.";
 
     public static int getMode(){
@@ -28,6 +30,14 @@ public class ExecuteScript extends InputCommand implements Command {
     }
     public void execute(String str){
         setMode(2);
+
+        if(arrayList.contains(str)){
+            System.out.println("Скрипт завершается досрочно из-за рекурсии. ");
+            return;
+        }
+        else{
+            arrayList.add(str);
+        }
         if (counter < 20) {
             counter += 1;
             Path path = Paths.get(str);
