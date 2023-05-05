@@ -5,8 +5,10 @@ import fergie.Commands.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
 /**
  * Command management class
+ *
  * @author FergieDoigrales/Stt1xX
  * @version 0.1
  * @throws IllegalArgumentException
@@ -18,7 +20,6 @@ public class CommandManager {
 
     public CommandManager(CollectionManager collectionManager, Scanner scanner) {
         this.collectionManager = collectionManager;
-
         commands.put("exit", new Exit());
         commands.put("update_id", new UpdateId(collectionManager, scanner));
         commands.put("add", new AddElement(collectionManager, scanner));
@@ -37,6 +38,7 @@ public class CommandManager {
         commands.put("clear", new Clear(collectionManager));
 
     }
+
     public Map<String, Command> getCommands() {
         return commands;
     }

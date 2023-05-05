@@ -2,8 +2,8 @@
 <fileManager>
     <movies>
         <coordinates>
+            <x>5.0</x>
             <y>32.0</y>
-            <x>5</x>
         </coordinates>
         <creationDate>04/05/2023</creationDate>
         <genre>DRAMA</genre>
@@ -14,7 +14,7 @@
             <eyeColor>RED</eyeColor>
             <location>
                 <name>loc</name>
-                <x>11</x>
+                <x>11.0</x>
                 <y>5534.0</y>
                 <z>212311</z>
             </location>

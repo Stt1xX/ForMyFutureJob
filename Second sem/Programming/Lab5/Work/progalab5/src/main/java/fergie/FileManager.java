@@ -18,8 +18,10 @@ import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 /**
  * A Class for all file operations and XML marshalling.
+ *
  * @author St1xXx
  * @version 0.1
  * @exception IOException, JAXBException
@@ -83,40 +85,38 @@ public class FileManager extends CollectionManager {
             CollectionManager collectionManager = new CollectionManager();
             collectionManager.arrayDeque = fileManager.movies;
             ArrayList<Long> allId = new ArrayList<>();
-            for(Movie movieForCheck: collectionManager.arrayDeque) {
+            for (Movie movieForCheck : collectionManager.arrayDeque) {
                 if (
                         movieForCheck.getOperator().getNationality() != null
-                        && movieForCheck.getOperator().getEyeColor() != null
-                        && movieForCheck.getOperator().getLocation() != null
-                        && movieForCheck.getId() != null
-                        && movieForCheck.getOperator() != null
-                        && movieForCheck.getCreationDate() != null
-                        && movieForCheck.getName() != null
-                        && movieForCheck.getGenre() != null
-                        && movieForCheck.getCoordinates() != null
-                        && movieForCheck.getOscarsCount() != null
-                        && movieForCheck.getOperator().getName() != null
-                        && movieForCheck.getCoordinates().getY() != null
-                        && movieForCheck.getCoordinates().getX() != null
-                        && movieForCheck.getOperator().getLocation().getX() != null
-                        && movieForCheck.getOperator().getLocation().getY() != null
-                        && movieForCheck.getOperator().getLocation().getZ() != null
-                        && !allId.contains(movieForCheck.getId())
-                ){
+                                && movieForCheck.getOperator().getEyeColor() != null
+                                && movieForCheck.getOperator().getLocation() != null
+                                && movieForCheck.getId() != null
+                                && movieForCheck.getOperator() != null
+                                && movieForCheck.getCreationDate() != null
+                                && movieForCheck.getName() != null
+                                && movieForCheck.getGenre() != null
+                                && movieForCheck.getCoordinates() != null
+                                && movieForCheck.getOscarsCount() != null
+                                && movieForCheck.getOperator().getName() != null
+                                && movieForCheck.getCoordinates().getY() != null
+                                && movieForCheck.getCoordinates().getX() != null
+                                && movieForCheck.getOperator().getLocation().getX() != null
+                                && movieForCheck.getOperator().getLocation().getY() != null
+                                && movieForCheck.getOperator().getLocation().getZ() != null
+                                && !allId.contains(movieForCheck.getId())
+                ) {
                     allId.add(movieForCheck.getId());
-                }
-                else{
+                } else {
                     System.out.println("исходный xml файл некорректный, " +
                             "убедитесь, что у всех фильмов разное поле id,enum заданы правильно, а также, " +
                             "все необходимые поля заполнены.\nНапишите 'y' " +
                             "если хотите продолжить с пустой коллекцией " +
-                            "и любой другой символ если хотите преравть программу." );
+                            "и любой другой символ если хотите преравть программу.");
                     Scanner scannerForConsole = new Scanner(System.in);
                     String otvet = scannerForConsole.nextLine();
-                    if (otvet.equals("y")){
+                    if (otvet.equals("y")) {
                         return new CollectionManager();
-                    }
-                    else{
+                    } else {
                         System.out.println("Работа программы завершена.");
                         System.exit(0);
                     }

@@ -35,8 +35,9 @@ public class Person {
     }
 
     public void setHeight(Long height) throws InvalidAttributeValueException {
-        if (height <= 0)
-            throw new InvalidAttributeValueException("Рост оператора не может быть меньше 0");
+        if (height <= 0 || height > Long.MAX_VALUE || height < Long.MIN_VALUE)
+            throw new InvalidAttributeValueException("Рост оператора не может быть меньше 0" +
+                    " или значение выходит за границы.");
         this.height = height;
     }
 

@@ -189,7 +189,7 @@ public class Movie implements Comparable<Movie> {
                 String mpaa = scanner.nextLine();
                 if (mpaa.equals("")){
                     movie.mpaaRating = null;
-                } else movie.setMpaaRating(MpaaRating.valueOf(mpaa));
+                } else movie.setMpaaRating(MpaaRating.valueOf(mpaa.toUpperCase()));
             };
             Checker.checkData(checker);
 
@@ -199,7 +199,7 @@ public class Movie implements Comparable<Movie> {
                 System.out.println(Arrays.toString(MovieGenre.values()));
             }
             checker = () -> {
-                movie.setGenre(MovieGenre.valueOf(scanner.nextLine()));
+                movie.setGenre(MovieGenre.valueOf(scanner.nextLine().toUpperCase()));
             };
             Checker.checkData(checker);
 
@@ -242,7 +242,7 @@ public class Movie implements Comparable<Movie> {
                     System.out.println(Arrays.toString(Color.values()));
                 }
                 checker = () -> {
-                    operator.setEyeColor(Color.valueOf(scanner.nextLine()));
+                    operator.setEyeColor(Color.valueOf(scanner.nextLine().toUpperCase()));
                 };
                 Checker.checkData(checker);
 
@@ -252,7 +252,7 @@ public class Movie implements Comparable<Movie> {
                     System.out.println(Arrays.toString(Country.values()));
                 }
                 checker = () -> {
-                    operator.setNationality(Country.valueOf(scanner.nextLine()));
+                    operator.setNationality(Country.valueOf(scanner.nextLine().toUpperCase()));
                 };
                 Checker.checkData(checker);
 

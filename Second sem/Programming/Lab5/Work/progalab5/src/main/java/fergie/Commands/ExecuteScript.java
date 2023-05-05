@@ -10,8 +10,6 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class ExecuteScript extends InputCommand implements Command {
-
-    private static int counter; //для рекурсии
     private static int mode;
 
     private static Stack<String> stackOfScripts = new Stack<>();
@@ -63,13 +61,10 @@ public class ExecuteScript extends InputCommand implements Command {
 //                }
             while (scannerForScript.hasNextLine()) {
 
+                System.out.println("\n");
                 String s = (scannerForScript.nextLine());
                 arg = s.split("\s+");
                 try{
-//                    if (arg.length == 2)
-////                        commandManager.getCommands().get(arg[0].toLowerCase()).execute(arg[1] + ' ' + arg[2]);
-////                    else
-////                        commandManager.getCommands().get(s.toLowerCase()).execute("");
                     StringBuilder strForScript = new StringBuilder();
                     for (String value : arg) {
                         strForScript.append(value).append(" ");
@@ -87,8 +82,6 @@ public class ExecuteScript extends InputCommand implements Command {
                 } catch (IllegalArgumentException e){
                     System.out.println("Данная команда не имеет аргументов.");
                 }
-//            } else
-//                System.out.println("Слишком длинная команда.");
             }
             System.out.println("Скрипт выполнен.");
         } catch (IOException e) {

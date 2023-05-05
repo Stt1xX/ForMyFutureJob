@@ -35,7 +35,7 @@ public class CheckData {
     }
 
     public static boolean checkLong(Long f) {
-        if (f == null) {
+        if (f == null || f > Long.MAX_VALUE || f < Long.MIN_VALUE) {
             System.out.println("Значение поля не может быть null");
             return false;
         } else

@@ -11,7 +11,7 @@ public class SumOfOscarsCount extends CollectionCommand implements Command {
     }
 
     public void execute(String arg) {
-        System.out.println(collectionManager.sumOfOscarsCount());
+        System.out.println("Общая сумма оскаров: " + collectionManager.sumOfOscarsCount());
     }
 
 

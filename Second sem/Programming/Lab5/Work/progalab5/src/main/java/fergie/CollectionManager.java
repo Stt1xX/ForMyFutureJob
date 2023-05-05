@@ -159,6 +159,7 @@ public class CollectionManager {
     }
 
     public void show() {
+        System.out.println("\n");
         for (Movie movie : arrayDeque) {
             System.out.print(" " + movie.toString() + "\n");
             for (int i = 0; i < 20; i++){
