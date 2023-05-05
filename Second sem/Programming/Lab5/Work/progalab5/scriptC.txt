@@ -1,5 +1,5 @@
 help
-execute_script C:\Users\timra\Desktop\ForMyFutureJob\Second sem\Programming\Lab5\Work\progalab5\script.txt
+execute_script C:\Users\timra\Desktop\ForMyFutureJob\Second sem\Programming\Lab5\Work\progalab5\scriptD.txt
 add
 test
 3
@@ -52,4 +52,5 @@ sum_of_oscars_count
 remove_head
 show
 remove_by_id 1
+
 info
