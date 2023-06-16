@@ -1,0 +1,128 @@
+ORG 0x200
+ASR
+ASR
+ASR
+ASR
+RET
+
+ORG 0
+CLA
+LD FIRST
+ADD SECOND
+ST RES; записали результат в ячейку 'RES' в 16-ой сс
+
+LD RES
+AND p1
+ST p1; записали единичный разряд результата в p1 
+
+LD RES
+AND p2
+CALL 0x200; 4 раза сделали ASR
+ST p2; записали десятичный разряд результата в p2
+
+LD RES 
+AND p3
+SWAB
+ST p3; записали сотый разряд результата в p3
+
+LD RES
+AND p4
+CALL 0x200; 4 раза сделали ASR
+SWAB
+ST p4; записали тысячный разряд результата в p4
+CLC
+
+LD p1
+CALL 0x2C
+LD r1
+OUT 0x14
+HLT
+
+ORG 0x020
+FIRST: WORD 0xF; в 16-ой системе счисления
+SECOND: WORD 0xF; в 16-ой системе счисления
+RES: WORD ?; в 16-ой системе счисления
+
+; для парсера числа в 16-рой системе:
+p4: WORD 0xF000; разряды результата в 16-сс(старший)
+p3: WORD 0x0F00; разряды результата в 16-сс
+p2: WORD 0x00F0; разряды результата в 16-сс
+p1: WORD 0x000F; разряды результата в 16-сс(младший)
+
+r4: WORD ?; разряды результата в 10-сс(старший)
+r3: WORD ?; разряды результата в 10-сс
+r2: WORD ?; разряды результата в 10-сс
+r1: WORD ?; разряды результата в 10-сс(младший)
+
+PERENOS: WORD ?; перенос в старший разряд
+
+ORG 0x2C
+
+CMP #0x0
+BEQ temp0
+CMP #0x1
+BEQ temp1
+CMP #0x2
+BEQ temp2
+CMP #0x3
+BEQ temp3
+CMP #0x4
+BEQ temp4
+CMP #0x5
+BEQ temp5
+CMP #0x6
+BEQ temp6
+CMP #0x7
+BEQ temp7
+CMP #0x8
+BEQ temp8
+CMP #0x9
+BEQ temp9
+CMP #0xA
+BEQ temp10
+CMP #0xB
+BEQ temp11
+CMP #0xC
+BEQ temp12
+CMP #0xD
+BEQ temp13
+CMP #0xE
+BEQ temp14
+CMP #0xF
+BEQ temp15
+temp10: WORD 0x9ADD; перенос в старший разряд = 1
+temp0: LD #0x0
+ST r1
+RET
+temp11: WORD 0x9ADD; перенос в старший разряд = 1
+temp1: LD #0x1
+ST r1
+RET
+temp12: WORD 0x9ADD; перенос в старший разряд = 1
+temp2: LD #0x2
+ST r1
+RET
+temp13: WORD 0x9ADD; перенос в старший разряд = 1
+temp3: LD #0x3
+ST r1
+RET
+temp14: WORD 0x9ADD; перенос в старший разряд = 1
+temp4: LD #0x4
+ST r1
+RET
+temp15: WORD 0x9ADD; перенос в старший разряд = 1
+temp5: LD #0x5
+ST r1
+RET
+temp6: LD #0x6
+ST r1
+RET
+temp7: LD #0x7
+ST r1
+RET
+temp8: LD #0x8
+ST r1
+RET
+temp9: LD #0x9
+ST r1
+RET
